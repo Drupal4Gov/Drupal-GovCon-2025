@@ -83,17 +83,21 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan -p 22 svn-6971.prod.hosting.acquia.com >> ~/.ssh/known_hosts
 
-      - name: Setup Nodejs
-        uses: actions/setup-node@v4
-
       - name: Install latest Yarn
         run: corepack enable
+
+      - name: Setup Nodejs
+        uses: actions/setup-node@v4
 
       - name: Activate latest Yarn
         run: yarn set version stable
   
       - name: Setup Yarn
         run: npm install -g yarn
+
+      - name: Avoid GitHub rate limit for Composer
+        run: |
+          composer install --no-dev --optimize-autoloader
 
       - name: Deploy to Acquia Dev
         run: |
