@@ -3,4 +3,5 @@ _core:
 mode: simple
 ignored_config_entities:
   - core.menu.static_menu_link_overrides
+  - google_analytics.settings
   - govcon_custom.settings

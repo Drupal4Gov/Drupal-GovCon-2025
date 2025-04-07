@@ -1,6 +1,8 @@
 _core:
   default_config_hash: 4GIX5Esnc_umpXUBj4IIocRX7Mt5fPhm4AgXfE3E56E
 module:
+  acquia_connector: 0
+  acquia_purge: 0
   admin_toolbar: 0
   admin_toolbar_search: 0
   admin_toolbar_tools: 0
@@ -59,6 +61,11 @@ module:
   path: 0
   path_alias: 0
   phpass: 0
+  purge: 0
+  purge_drush: 0
+  purge_processor_cron: 0
+  purge_processor_lateruntime: 0
+  purge_queuer_coretags: 0
   search: 0
   seckit: 0
   shortcut: 0
