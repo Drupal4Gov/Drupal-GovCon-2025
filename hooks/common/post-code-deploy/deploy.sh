@@ -12,10 +12,7 @@
 
 set -ev
 
-site="$1"
-target_env="$2"
-
-echo "Deploying code to $site.$target_env"
-./vendor/bin/drush deploy @$site.$target_env --yes --no-interaction
+echo "Running drush deploy"
+./vendor/bin/drush deploy --yes
 
 set +v
