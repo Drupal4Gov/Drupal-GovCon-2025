@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - acquia-main
+      - acquia-integration
   pull_request:
     branches:
       - acquia-main
@@ -13,9 +14,7 @@ defaults:
     shell: bash
 
 env:
-  GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
-  GITHUB_OWNER: ${{ github.repository_owner }}
-  PRODUCTION_BRANCH: "main"
+  GITHUB_TOKEN: ${{ github.token }}
   LHCI_GITHUB_TOKEN: ${{ github.token }}
   LHCI_BUILD_CONTEXT__CURRENT_HASH: ${{ github.event.pull_request.head.sha || github.sha }}
   ACQUIA_SSH_PRIVATE_KEY: ${{ secrets.ACQUIA_SSH_PRIVATE_KEY }}
