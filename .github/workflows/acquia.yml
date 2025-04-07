@@ -42,33 +42,6 @@ jobs:
           # this is to fix GIT not liking owner of the checkout dir
           chown -R $(id -u):$(id -g) $PWD
 
-      - name: Cache composer cache
-        uses: actions/cache@v4
-        env:
-          cache-name: cache-composer-cache
-        with:
-          path: ~/.composer/cache
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-      - name: Cache vendor folder
-        uses: actions/cache@v4
-        env:
-          cache-name: cache-vendor
-        with:
-          path: ./vendor
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/composer.lock') }}
-
-      - name: Cache drush folder
-        uses: actions/cache@v3
-        env:
-          cache-name: cache-drush
-        with:
-          path: ./drush
-          key: ${{ runner.os }}-build-${{ env.cache-name }}
-
       - name: Avoid GitHub rate limit for Composer
         run: |
           composer config -g github-oauth.github.com $GITHUB_TOKEN
@@ -94,10 +67,6 @@ jobs:
   
       - name: Setup Yarn
         run: npm install -g yarn
-
-      - name: Avoid GitHub rate limit for Composer
-        run: |
-          composer install --no-dev --optimize-autoloader
       
       - name: Setup Git User
         uses: qoomon/actions--setup-git@v1
