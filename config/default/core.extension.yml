@@ -68,6 +68,7 @@ module:
   purge_queuer_coretags: 0
   search: 0
   seckit: 0
+  shield: 0
   shortcut: 0
   simple_sitemap: 0
   structure_sync: 0
