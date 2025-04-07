@@ -1,4 +1,4 @@
-name: Deploy to Acquia
+name: Deploy to Acquia Dev
 
 on:
   push:
@@ -13,15 +13,9 @@ defaults:
     shell: bash
 
 env:
-  TERMINUS_TOKEN: ${{ secrets.TERMINUS_TOKEN }}
-  CI_BRANCH: ${{ github.head_ref || github.ref_name }}
-  BASE_BRANCH: ${{ github.base_ref }}
-  SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
   GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
   GITHUB_OWNER: ${{ github.repository_owner }}
   PRODUCTION_BRANCH: "main"
-  PR_NUMBER: ${{ github.event.number }}
-  TERMINUS_SITE: "drupal-govcon"
   LHCI_GITHUB_TOKEN: ${{ github.token }}
   LHCI_BUILD_CONTEXT__CURRENT_HASH: ${{ github.event.pull_request.head.sha || github.sha }}
   ACQUIA_SSH_PRIVATE_KEY: ${{ secrets.ACQUIA_SSH_PRIVATE_KEY }}
@@ -29,7 +23,7 @@ env:
 
 jobs:
   build:
-    name: Acquia Pipelines
+    name: Deploy to Acquia Dev Site
     runs-on: ubuntu-latest
     steps:
       - name: Setup PHP
@@ -76,47 +70,9 @@ jobs:
           path: ./drush
           key: ${{ runner.os }}-build-${{ env.cache-name }}
 
-      - name: setup-environment-vars
-        run: |
-          export CI_BRANCH=`curl -u "${GITHUB_OWNER}:${GITHUB_TOKEN}" \
-            -H "Accept: application/vnd.github.groot-preview+json" \
-            "https://api.github.com/repos/${CI_PROJECT_NAME}/commits/${COMMIT_SHA}/pulls" | \
-            python3 -c "import sys, json; print(json.load(sys.stdin)[0]['head']['ref'])"`
-
       - name: Avoid GitHub rate limit for Composer
         run: |
           composer config -g github-oauth.github.com $GITHUB_TOKEN
-
-      - name: Prepare Artifact
-        run: |
-          composer install --optimize-autoloader --no-progress --no-dev
-
-      - name: Install DDEV
-        run: |
-          sudo apt-get update && sudo apt-get install -y curl jq libnss3-tools
-          LATEST_DDEV_VERSION=$(curl -s https://api.github.com/repos/ddev/ddev/releases/latest | jq -r '.tag_name')
-          echo "Latest DDEV version: $LATEST_DDEV_VERSION"
-
-          DDEV_ASSET_URL=$(curl -s https://api.github.com/repos/ddev/ddev/releases/latest | jq -r '.assets[] | select(.name | test("ddev_.*_linux_amd64.deb")) | .browser_download_url')
-
-          if [[ -z "$DDEV_ASSET_URL" ]]; then
-            echo "Error: Could not find the correct DDEV .deb package"
-            exit 1
-          fi
-
-          echo "Downloading: $DDEV_ASSET_URL"
-          wget "$DDEV_ASSET_URL" -O ddev.deb
-          sudo dpkg -i ddev.deb
-          rm ddev.deb
-
-          ddev --version
-          ddev config global --instrumentation-opt-in=false --omit-containers=ddev-ssh-agent
-
-      - name: Start DDEV
-        run: ddev start
-
-      - name: Run Frontend Production Build
-        run: ddev frontend prod
 
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.7.0
@@ -128,20 +84,21 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan -p 22 svn-6971.prod.hosting.acquia.com >> ~/.ssh/known_hosts
 
-      - name: Add Acquia Git remote
-        run: |
-          git remote add acquia ${{ env.ACQUIA_REPO }}
-          git config user.name "Nitesh Sethia"
-          git config user.email "nitesh@digitalpolygon.com"
+      - name: Setup Nodejs
+        uses: actions/setup-node@v4
 
-      - name: Force Add and Commit All Files
-        run: |
-          git add --all --force
-          git commit -m "Force deploy from GitHub Actions" || echo "Nothing to commit"
+      - name: Install latest Yarn
+        run: corepack prepare yarn@stable --activate
 
-      - name: Push to Acquia
+      - name: Activate latest Yarn
+        run: yarn set version stable
+  
+      - name: Setup Yarn
+        run: npm install -g yarn
+
+      - name: Deploy to Acquia Dev
         run: |
-          git push acquia acquia-main --force
+          vendor/bin/polymer artifact:deploy polymer-govcon-build --no-interaction -vvv --branch="main" --commit-msg="Generated artifact from SHA $GITHUB_SHA AND GitHub Actions run ID $GITHUB_RUN_ID."
 
   # vr_tests:
   #   name: Run Visual Regression Tests
