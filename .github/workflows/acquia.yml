@@ -67,6 +67,10 @@ jobs:
   
       - name: Setup Yarn
         run: npm install -g yarn
+
+      - name: Install Composer Dependencies
+        run: |
+          composer install --no-dev --optimize-autoloader
       
       - name: Setup Git User
         uses: qoomon/actions--setup-git@v1
