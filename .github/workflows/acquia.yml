@@ -98,10 +98,13 @@ jobs:
       - name: Avoid GitHub rate limit for Composer
         run: |
           composer install --no-dev --optimize-autoloader
+      
+      - name: Setup Git User
+        uses: qoomon/actions--setup-git@v1
 
       - name: Deploy to Acquia Dev
         run: |
-          vendor/bin/polymer artifact:deploy polymer-govcon-build --no-interaction -vvv --branch="main" --commit-msg="Generated artifact from SHA $GITHUB_SHA AND GitHub Actions run ID $GITHUB_RUN_ID."
+          vendor/bin/polymer artifact:deploy polymer-govcon-build --no-interaction -vvv --branch="acquia-integration" --commit-msg="Generated artifact from SHA $GITHUB_SHA AND GitHub Actions run ID $GITHUB_RUN_ID."
 
   # vr_tests:
   #   name: Run Visual Regression Tests
