@@ -3,11 +3,7 @@ name: Deploy to Acquia Dev
 on:
   push:
     branches:
-      - acquia-main
-      - acquia-integration
-  pull_request:
-    branches:
-      - acquia-main
+      - main
 
 defaults:
   run:
@@ -15,8 +11,6 @@ defaults:
 
 env:
   GITHUB_TOKEN: ${{ github.token }}
-  LHCI_GITHUB_TOKEN: ${{ github.token }}
-  LHCI_BUILD_CONTEXT__CURRENT_HASH: ${{ github.event.pull_request.head.sha || github.sha }}
   ACQUIA_SSH_PRIVATE_KEY: ${{ secrets.ACQUIA_SSH_PRIVATE_KEY }}
   ACQUIA_REPO: ${{ secrets.ACQUIA_REPO }}
 
