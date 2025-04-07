@@ -63,11 +63,9 @@ jobs:
         uses: actions/setup-node@v4
 
       - name: Activate latest Yarn
-        run: yarn set version stable
-  
-      - name: Setup Yarn
-        run: npm install -g yarn
-
+        run: |
+          yarn set version stable
+          yarn --version
       - name: Install Composer Dependencies
         run: |
           composer install --no-dev --optimize-autoloader
