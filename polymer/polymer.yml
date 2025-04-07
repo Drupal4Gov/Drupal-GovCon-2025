@@ -1,0 +1,53 @@
+# Hide any command prefixed with 'internal:'.
+# Note: Robo's Help annotation CANNOT reverse the effect of this configuration
+# since attributes are applied BEFORE the command factory's command info listeners.
+# This means you can't use #[Help(hidden: false)] to reverse the effect of this
+# configuration.
+hide-internal-commands: true
+
+project:
+  human_name: govcon
+  machine_name: govcon
+  local:
+    hostname: local.${project.machine_name}.com
+    protocol: http
+    uri: ${project.local.protocol}://${project.local.hostname}
+  type: php
+  recipe: common
+
+deploy:
+  build-dependencies: true
+  dir: ${tmp.dir}/polymer-deploy
+  docroot: ${deploy.dir}/docroot
+  exclude_file: ${polymer.root}/config/deploy-exclude.txt
+  exclude_additions_file: ${repo.root}/polymer/deploy-exclude-additions.txt
+  gitignore_file: ${polymer.root}/config/.gitignore
+
+git:
+  commit-msg:
+    pattern: '/(^(DGC)-[0-9]+(: )[^ ].{15,}\.)|(Merge branch(.)+)/'
+    example: "DGC-62: Update module configuration."
+  default-branch: main
+  remotes:
+    origin: "capitalcamp@svn-6971.prod.hosting.acquia.com:capitalcamp.git"
+  user:
+    # Name and email to use for the purposes of Git commits if you don't want to
+    # use global Git configuration.
+    name: "Gaurav Goyal"
+    email: "gaurav@digitalpolygon.com"
+
+builds:
+  frontend:
+    dir: ${repo.root}/docroot/themes/custom/govcon
+    setup: yarn install
+    assets: yarn dev && yarn build-storybook
+
+artifacts:
+  main:
+    dependent-builds:
+      - frontend
+
+drupal:
+  drush:
+    aliases:
+      remote: 'capitalcamp.dev'
