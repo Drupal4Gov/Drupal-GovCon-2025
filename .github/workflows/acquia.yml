@@ -123,15 +123,25 @@ jobs:
         with:
           ssh-private-key: ${{ env.ACQUIA_SSH_PRIVATE_KEY }}
 
+      - name: Add Acquia Git Host to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -p 22 svn-6971.prod.hosting.acquia.com >> ~/.ssh/known_hosts
+
       - name: Add Acquia Git remote
         run: |
           git remote add acquia ${{ env.ACQUIA_REPO }}
           git config user.name "Nitesh Sethia"
           git config user.email "nitesh@digitalpolygon.com"
 
-      # - name: Push to Acquia
-      #   run: |
-      #     git push acquia acquia-main
+      - name: Force Add and Commit All Files
+        run: |
+          git add --all --force
+          git commit -m "Force deploy from GitHub Actions" || echo "Nothing to commit"
+
+      - name: Push to Acquia
+        run: |
+          git push acquia acquia-main --force
 
   # vr_tests:
   #   name: Run Visual Regression Tests
