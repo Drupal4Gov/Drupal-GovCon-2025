@@ -12,6 +12,12 @@
 
 set -ev
 
+site="$1"
+target_env="$2"
+
+repo_root="/var/www/html/$site.$target_env"
+cd $repo_root
+
 echo "Running drush deploy"
 ./vendor/bin/drush deploy -vvv --yes
 
