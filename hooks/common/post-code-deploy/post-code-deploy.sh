@@ -13,6 +13,6 @@
 set -ev
 
 echo "Running drush deploy"
-./vendor/bin/drush deploy --yes
+./vendor/bin/drush deploy -vvv --yes
 
 set +v
