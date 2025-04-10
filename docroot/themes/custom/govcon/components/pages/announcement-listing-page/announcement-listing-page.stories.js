@@ -1,4 +1,4 @@
-import allAnnouncementPage from './announcement-listing.twig';
+import allAnnouncementPage from './announcement-listing-page.twig';
 // Header Props
 import defaultLogo from '../../../logo.svg';
 import useraccount_data from '@molecules/user-account/user-account.yml';

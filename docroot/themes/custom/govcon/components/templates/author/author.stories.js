@@ -19,7 +19,7 @@ Author.args = {
     first_name: "Anwesha",
     last_name: "Saha"
   },
-  author_image: authorImage,
+  author_image: '<img src=' + authorImage + '>',
   author_image_alt: "Author Image",
   author_job_title: {
     label: "Job Title",

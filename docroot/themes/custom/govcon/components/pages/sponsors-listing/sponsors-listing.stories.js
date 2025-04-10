@@ -1,4 +1,4 @@
-import sponsorsPage from './sponsors.twig';
+import sponsorsPage from './sponsors-listing.twig';
 // Header Props
 import defaultLogo from '../../../logo.svg';
 import useraccount_data from '@molecules/user-account/user-account.yml';
@@ -12,10 +12,8 @@ import primaryLogo from '../../../assets/images/Default.png';
 import sponsorImage from '../../../assets/images/Default.png';
 import '@organisms/sponsors/sponsors.scss';
 
-
-
 export default {
-  title: 'Pages/Sponsors',
+  title: 'Pages/Sponsor Listing',
   component: sponsorsPage,
   argTypes: {
   }
