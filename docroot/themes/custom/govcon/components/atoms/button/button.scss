@@ -27,6 +27,7 @@ $transition: 0.3s;
   &.secondary {
     background-color: color.$secondary;
     box-shadow: inset $offset $offset 0px color.$white, $offset $offset 0px color.$secondary;
+    color: color.$white !important;
   }
 
   &.minimal {
