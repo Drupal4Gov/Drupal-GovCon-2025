@@ -8,6 +8,10 @@
   column-gap: 1rem;
   row-gap: 2rem;
 
+  @include mixins.media-breakpoint-down(md) {
+    flex-direction: column;
+  }
+
   .form-item {
     &.form-type-textfield,
     &.form-type-select {

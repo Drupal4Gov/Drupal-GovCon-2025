@@ -376,7 +376,7 @@ display:
               content_editor: '0'
               administrator: '0'
               content_author: '0'
-            placeholder: ''
+            placeholder: 'Search by Speaker'
           is_grouped: false
           group_info:
             label: ''
@@ -511,7 +511,7 @@ display:
           plugin_id: standard
           required: false
       css_class: ''
-      use_ajax: true
+      use_ajax: false
       header: {  }
       footer: {  }
       display_extenders: {  }

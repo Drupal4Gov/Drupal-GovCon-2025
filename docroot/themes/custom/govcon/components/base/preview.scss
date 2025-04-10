@@ -1,0 +1,21 @@
+body:has(.node-preview-container) {
+  .node-preview-container {
+    background-color: #dedede;
+    position: fixed;
+    top: 6rem;
+    right: 1rem;
+    width: 25%;
+    border-radius: 6px;
+  }
+
+  .node-preview-container .form-type-select {
+    margin: 0;
+
+    select {
+      box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+      padding: 15px 10px;
+      border: 1px solid #dedede;
+      border-radius: 6px;
+    }
+  }
+}

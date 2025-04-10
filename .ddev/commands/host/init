@@ -14,7 +14,7 @@ echo "Running composer."
 ddev composer install
 
 echo "Pulling latest database from dev."
-ddev pull pantheon -y
+ddev pull acquia -y
 
 echo "Running drush deploy"
 ddev drush deploy -y
