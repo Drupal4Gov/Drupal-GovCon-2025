@@ -55,3 +55,8 @@ session-speaker:
   css:
     theme:
       dist/components/organisms/session-speakers/session-speaker.css: {}
+
+core-sponsor:
+  css:
+    theme:
+      dist/components/molecules/core-sponsor/core-sponsor.css: {}

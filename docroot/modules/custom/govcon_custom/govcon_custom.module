@@ -42,7 +42,8 @@ function govcon_custom_views_query_alter(ViewExecutable $view, QueryPluginBase $
   if (
     ($view->id() === 'announcements' && $view->current_display === 'all_announcement') ||
     ($view->id() === 'announcements' && $view->current_display === 'recent_announcement') ||
-    ($view->id() === 'sponsors' && $view->current_display === 'sponsors')
+    ($view->id() === 'sponsors' && $view->current_display === 'sponsors') ||
+    ($view->id() === 'sponsors' && $view->current_display === 'govcon_core_sponsor')
   ) {
 
     // Get the taxonomy term ID dynamically (can be from the URL, user input, etc.).
@@ -53,10 +54,16 @@ function govcon_custom_views_query_alter(ViewExecutable $view, QueryPluginBase $
 
       foreach ($query->where as &$where_group) {
         foreach ($where_group['conditions'] as &$condition) {
-          if (strpos($condition['field'], 'node__field_conference_year.field_conference_year_target_id = :node__field_conference_year_field_conference_year_target_id') !== FALSE) {
+          if ($condition['field'] === ('node__field_conference_year.field_conference_year_target_id = :node__field_conference_year_field_conference_year_target_id')) {
             $condition['value'] = [
               ':node__field_conference_year_field_conference_year_target_id' => $conference_year_id];
           }
+
+          if ($condition['field'] === ('node__field_conference_year.field_conference_year_target_id = :node__field_conference_year_field_conference_year_target_id1')) {
+            $condition['value'] = [
+              ':node__field_conference_year_field_conference_year_target_id1' => $conference_year_id];
+          }
+
         }
       }
     }

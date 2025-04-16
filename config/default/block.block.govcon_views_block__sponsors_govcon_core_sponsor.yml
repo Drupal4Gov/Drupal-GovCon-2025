@@ -1,0 +1,24 @@
+uuid: 3180d876-570a-4bf6-8d61-abb3d16b6f2c
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.sponsors
+  module:
+    - views
+  theme:
+    - govcon
+id: govcon_views_block__sponsors_govcon_core_sponsor
+theme: govcon
+region: header
+weight: 0
+provider: null
+plugin: 'views_block:sponsors-govcon_core_sponsor'
+settings:
+  id: 'views_block:sponsors-govcon_core_sponsor'
+  label: ''
+  label_display: '0'
+  provider: views
+  views_label: ''
+  items_per_page: none
+visibility: {  }

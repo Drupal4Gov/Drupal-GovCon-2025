@@ -1,0 +1,27 @@
+import { Meta, Canvas, Story, Controls } from '@storybook/addon-docs';
+import * as Stories from './core-sponsor.stories';
+import coreSponsorTwig from './core-sponsor.twig';
+
+<Meta title="Molecules/Core Sponsor" of={Stories} />
+
+# Core Sponsor
+
+The **Core Sponsor** component displays a structured set of sponsor logos, each wrapped in a link. It is typically used in headers, footers, or sections meant to highlight sponsorships.
+
+## Component Preview
+
+<Canvas>
+  <Story name="Default" args={Stories.Default.args}>
+    {coreSponsorTwig(Stories.Default.args)}
+  </Story>
+</Canvas>
+
+## Usage
+
+This component expects a variable called `core_sponsors`, which is an array of sponsor objects. Each object should contain:
+
+- `logo_url`: The URL for the sponsor's logo image.
+- `logo_alt`: Alternative text for accessibility (defaults to `"Sponsor Logo"`).
+- `link`: A URL (external or internal) to wrap around the logo (defaults to `"#"` if not provided).
+
+If the `core_sponsors` array is empty, no logos will be displayed.

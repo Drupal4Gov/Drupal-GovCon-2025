@@ -1,6 +1,7 @@
 @use '@atoms/colors/color.scss' as color;
 @use '@base/mixins.scss' as mixins;
 @use '@molecules/menu/menu.scss';
+@use '@molecules/core-sponsor/core-sponsor.scss';
 
 $button-offset: 4px;
 
@@ -119,6 +120,20 @@ header {
       padding: 20px;
       transition: left 0.3s ease-in-out;
       z-index: 1000;
+
+      @include mixins.media-breakpoint-down(lg) {
+        padding-top:  100px;
+        display: flex;
+        flex-direction: column;
+      
+        > .header__bottom__menu {
+          order: 1;
+        }
+
+        > .header__top__section {
+          order: 2;
+        }
+      }
     }
 
     .header__menu.open {
@@ -167,6 +182,30 @@ header {
         margin: 20px auto;
         padding: 0;
       }
+    }
+  }
+}
+
+.header__top__section {
+  display: flex;
+  justify-content: flex-end;
+  column-gap: 50px;
+  align-items: flex-start;
+
+  @include mixins.media-breakpoint-down(lg) {
+    display: flex;
+    flex-direction: column;
+  
+    > .header__top__menu {
+      order: 1;
+    }
+  
+    > .header__bottom__menu {
+      order: 2;
+    }
+  
+    > .header__core-sponsor {
+      order: 3;
     }
   }
 }

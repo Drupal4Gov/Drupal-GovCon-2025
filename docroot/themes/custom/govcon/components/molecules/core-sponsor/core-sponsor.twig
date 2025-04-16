@@ -1,0 +1,15 @@
+<div class="core-sponsor_listing">
+  {% set core_sponsor_logo_count = core_sponsors|length %}
+  {% block header__coresponsors %}
+    <div class="core-sponsor_listing-container">
+      {% for core_sponsor in core_sponsors %}
+        <a href="{{ core_sponsor.link|default('#') }}" target="_blank">
+          {% include "@atoms/logo/logo.twig" with {
+            src_path: core_sponsor.logo_url,
+            src_alt: core_sponsor.logo_alt|default('Sponsor Logo')
+          } %}
+        </a>
+      {% endfor %}
+    </div>
+    {% endblock %}
+</div>
