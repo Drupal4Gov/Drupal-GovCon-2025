@@ -92,4 +92,4 @@ UPDATE users SET mail=CONCAT('user', uid, '@example.com'), init=CONCAT('user', u
 
 
 EOF
-) | ./vendor/bin/drush @$site.$target_env ah-sql-cli --db=$db_name
+) | /var/www/html/$site.$target_env/vendor/bin/drush @$site.$target_env ah-sql-cli --db=$db_name
