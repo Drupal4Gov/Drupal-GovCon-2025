@@ -64,14 +64,20 @@ nav {
         }
 
         ul.dropdown-menu {
-          display: block;
+          visibility: visible;
+        }
+      }
+
+      &:focus-within {
+        ul.dropdown-menu {
+          visibility: visible;
         }
       }
     }
   }
 
   ul.dropdown-menu {
-    display: none;
+    visibility: hidden;
     position: absolute;
     top: 82px;
 
