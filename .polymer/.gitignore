@@ -1,0 +1,4 @@
+# The .polymer directory is Polymer's project marker and files-root.
+# Polymer auto-generates config.yml here at runtime; keep it out of git
+# but track the directory itself so CI can locate the repo root.
+/config.yml
