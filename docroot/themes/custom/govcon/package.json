@@ -40,9 +40,18 @@
     "yaml-loader": "^0.8.1"
   },
   "dependencies": {
-    "twig": "^1.17.1"
+    "twig": "^3.0.0"
   },
   "resolutions": {
-    "webpack-dev-server": "^5.2.6"
+    "webpack-dev-server": "^5.2.6",
+    "uuid@^8.3.0": "^11.1.1",
+    "uuid@^8.3.2": "^11.1.1",
+    "uuid@^9.0.0": "^11.1.1",
+    "webpack-dev-middleware@^6.1.2": "^7.4.6",
+    "glob@^10.2.2": "^14.0.2",
+    "glob@^10.3.7": "^14.0.2",
+    "glob@^10.3.10": "^14.0.2",
+    "minimatch@^10": "^11.0.1",
+    "webpack": "~5.105.4"
   }
 }
