@@ -117,7 +117,8 @@
             "file-mapping": {
                 "[project-root]/.editorconfig": false,
                 "[project-root]/.gitattributes": false
-            }
+            },
+            "gitignore": false
         },
         "installer-paths": {
             "docroot/core": [
