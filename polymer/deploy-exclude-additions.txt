@@ -1,5 +1,12 @@
 # Paths excluded from the Acquia deploy artifact, on top of Polymer's defaults.
+#
+# Source-repo .gitignore files must not reach the artifact: they ignore files
+# that are generated during the build and that the site needs at runtime, so git
+# would leave them out of the committed build.
+#
 # docroot/.gitignore ignores the scaffolded autoload.php and autoload_runtime.php,
-# which Drupal and Drush need at runtime; copying it into the artifact keeps them
-# out of the committed build.
+# which Drupal and Drush need to boot.
 /docroot/.gitignore
+# The govcon theme's .gitignore ignores dist/, the compiled CSS and JS that
+# govcon.libraries.yml loads.
+/docroot/themes/custom/govcon/.gitignore
