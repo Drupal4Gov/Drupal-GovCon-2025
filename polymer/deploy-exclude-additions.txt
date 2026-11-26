@@ -1,0 +1,5 @@
+# Paths excluded from the Acquia deploy artifact, on top of Polymer's defaults.
+# docroot/.gitignore ignores the scaffolded autoload.php and autoload_runtime.php,
+# which Drupal and Drush need at runtime; copying it into the artifact keeps them
+# out of the committed build.
+/docroot/.gitignore
